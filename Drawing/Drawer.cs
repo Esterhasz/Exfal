@@ -26,7 +26,7 @@ namespace xfal.Drawing
         private GraphicsDevice Graphics => Source.Graphics;
         private SpriteBatch SpriteBatch => Source.SpriteBatch;
 
-        private readonly SortedDictionary<int, Camera> renderers = new();
+        public CameraCollection Cameras { get; } = new();
 
         private Rectangle destination;
         private Rectangle windowBounds;
@@ -42,14 +42,6 @@ namespace xfal.Drawing
                 new RenderSource(spriteBatch, graphicsManager), 
                 size)) { }
 
-        public void AddCamera(Camera item, int order) => renderers.Add(order, item);
-        public void AddCamera(Camera item)
-        {
-            AddCamera(item, renderers.Count > 0 ? renderers.Last().Key + 1 : 0);
-        }
-        public void RemoveCamera(int order) => renderers.Remove(order);
-        public Camera GetCamera(int order) => renderers[order];
-
         public void Draw()
         {
             RenderAll();
@@ -61,7 +53,7 @@ namespace xfal.Drawing
         {
             OutputCamera.Render();
 
-            foreach (var item in renderers.Values)
+            foreach (var item in Cameras.Values)
             {
                 item.Render();
             }
@@ -75,7 +67,7 @@ namespace xfal.Drawing
 
             DrawItem(OutputCamera);
 
-            foreach (var item in renderers.Values)
+            foreach (var item in Cameras.Values)
             {
                 DrawItem(item);
             }
@@ -129,6 +121,11 @@ namespace xfal.Drawing
             return (canvasPoint / (Canvas.Size.ToVector2() / camera.Size.ToVector2()) + camera.Position).Floored();
         }
         public Vector2 ScreenToWorldPoint(Vector2 point) => ScreenToWorldPoint(point, OutputCamera);
+
+        public int SafeIndex()
+        {
+            return Cameras.Count > 0 ? Cameras.Last().Key + 1 : 0;
+        }
 
         public static Vector2 NormalizePoint(Vector2 point, Rectangle destination)
         {
