@@ -1,21 +1,21 @@
 # Exfal
-XNA Framework Abstraction Library (xfal) adds object oriented implementation of basic rendering system, input handling, time management, and even coroutines to simplify 
+An XNA abstraction layer library that adds object oriented implementation of basic rendering system, input handling, time management, and even coroutines to simplify 
 creation of graphical applications and games when using XNA-compatible frameworks since it is based on Microsoft.Xna.Framework namespace.
 
 ## Installation
-1. Download the latest release from https://github.com/sonesoul/xfal/releases  
-2. Add xfal.dll to your XNA or MonoGame project as a Project Reference (make sure your project is in .NET 6.0 or higher)
+1. Download the latest release from https://github.com/sonesoul/Exfal/releases  
+2. Add Exfal.dll to your XNA or MonoGame project as a Project Reference (make sure your project is in .NET 6.0 or higher)
 3. Add usings
 ```csharp
-using xfal;                 // StepTask, Time, Asset ...
-using xfal.Drawing;         // Drawer, Camera, DrawContext ...
-using xfal.InputHandling;   // Input, Key
-using xfal.Extensions;      // Vector2Extensions, NumericExtensions ...
+using Exfal;                 // StepTask, Time, Asset ...
+using Exfal.Drawing;         // Drawer, Camera, DrawContext ...
+using Exfal.InputHandling;   // Input, Key
+using Exfal.Extensions;      // Vector2Extensions, NumericExtensions ...
 ```
 4. You're done!
 
 > [!TIP]
-> Copy xfal.dll into your project directory and commit it to source control.
+> Copy Exfal.dll into your project directory and commit it to source control.
 This ensures the exact library version is tracked with the project and prevents dependency issues across machines.
 
 ## How To Use?
@@ -91,7 +91,7 @@ StepTask task = StepTask.Run(MyCoroutine(3));
 ```
 `StepTask.Yields` has some methods to manage your waiting time in the coroutine.
 > [!IMPORTANT]
-> `StepTask.Yields.WaitForSeconds(...)` and `StepTask.WaitForRealSeconds(...)` depend on `xfal.Time.Delta` and `xfal.Time.RealDelta`, so if you're using them, `xfal.Time` should be updated before
+> `StepTask.Yields.WaitForSeconds(...)` and `StepTask.Yields.WaitForRealSeconds(...)` depend on `Exfal.Time.Delta` and `Exfal.Time.RealDelta`, so if you're using them, `Exfal.Time` should be updated before
 
 It is easily extendable by making an extension class and overriding YieldInstruction.
 ```csharp
@@ -114,7 +114,7 @@ task.Complete(); // finishes coroutine and invokes Completed event
 By creating it from the constructor, you'll have to call `Start()` yourself.
 
 # Time
-For managing time, there is `xfal.Time` or just `Time` class. It's static. Call `Time.Update(...)` before any time-dependant updates. 
+For managing time, there is `Exfal.Time` or just `Time` class. It's static. Call `Time.Update(...)` before any time-dependant updates. 
 ```csharp
 var delta = Time.Delta;       // depends on Time.TimeScale
 var rdelta = Time.RealDelta;  // doesn't depend on Time.TimeScale
@@ -125,7 +125,7 @@ Time.FixedDelta = 1.0f / 30; // making bigger steps, can cause less accuracy in 
 ```
 
 # Input
-xfal has `Input` class which combines mouse handling and keyboard handling. It uses `xfal.Key` enum, which also includes both keyboard and mouse buttons. Needs to be updated through `Input.Update()` to work properly.
+Exfal has `Input` class which combines mouse handling and keyboard handling. It uses `Exfal.Key` enum, which also includes both keyboard and mouse buttons. Needs to be updated through `Input.Update()` to work properly.
 ```csharp
 if (Input.IsKeyDown(Key.MouseLeft))
   DoSomething(); 
@@ -177,7 +177,7 @@ static class RectScalerExtensions
 drawer.ScaleFunc = Drawer.OutputScaler.MyScale;
 ```
 ---
-xfal has LOTS of extensions. The most detailed ones are extensions for Vector2. 
+Exfal has LOTS of extensions. The most detailed ones are extensions for Vector2. 
 ```csharp
 //they are all returning values and DO NOT change the vector
 
