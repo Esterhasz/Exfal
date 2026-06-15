@@ -1,4 +1,4 @@
-# xfal
+# Exfal
 XNA Framework Abstraction Library (xfal) adds object oriented implementation of basic rendering system, input handling, time management, and even coroutines to simplify 
 creation of graphical applications and games when using XNA-compatible frameworks since it is based on Microsoft.Xna.Framework namespace.
 
