@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11903.348
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xfal", "xfal.csproj", "{ED074105-3848-40CE-9C42-6FACB68F0E90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exfal", "Exfal.csproj", "{ED074105-3848-40CE-9C42-6FACB68F0E90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E3B9ADA-AB6D-4262-B8C5-C9AACC5EC3E1}
 	EndGlobalSection
 EndGlobal

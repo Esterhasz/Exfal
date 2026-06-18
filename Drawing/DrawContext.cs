@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using nkast.Aether.Physics2D.Collision.Shapes;
-using nkast.Aether.Physics2D.Dynamics;
 using System;
 using System.Collections.Generic;
 using Exfal.Extensions;
@@ -127,18 +125,6 @@ namespace Exfal.Drawing
         public void Pixel(Vector2 position, Color color)
         {
             SpriteBatch.Draw(PixelTexture, position, color);
-        }
-
-        public void Polygon(Body body, PolygonShape shape, Color color, float boundThickness)
-        {
-            List<Vector2> vertices = new(shape.Vertices.Count);
-
-            foreach (var vertex in shape.Vertices) 
-            {
-                vertices.Add(vertex.RotatedAround(Vector2.Zero, body.Rotation) + body.Position);
-            }
-       
-            Polygon(vertices, color, boundThickness);
         }
     }
 }

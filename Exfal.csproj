@@ -2,11 +2,10 @@
   <PropertyGroup>
     <ImplicitUsings>disable</ImplicitUsings>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyVersion>2.4.0</AssemblyVersion>
+    <AssemblyVersion>2.4.1</AssemblyVersion>
     <FileVersion>2.4.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Aether.Physics2D.MG" Version="2.1.1" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
