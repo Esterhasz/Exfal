@@ -6,8 +6,7 @@ namespace Exfal.Extensions
     {
         public static float Clamp01(this float value) => Clamp(value, 0, 1);
         public static double Clamp01(this double value) => Clamp(value, 0, 1);
-        public static int Clamp01(this int value) => Clamp(value, 0, 1);
-
+        
         public static T ClampMin<T>(this T value, T min) where T : IComparable<T>
         {
             if (value.CompareTo(min) < 0)
