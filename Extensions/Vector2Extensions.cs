@@ -61,8 +61,8 @@ namespace Exfal.Extensions
         public static float Cross(this Vector2 a, Vector2 b) => a.X * b.Y - a.Y * b.X;
         public static Vector2 RotatedAround(this Vector2 v, Vector2 origin, float rotationRad)
         {
-            float cos = (float)Math.Cos(rotationRad);
-            float sin = (float)Math.Sin(rotationRad);
+            float cos = MathF.Cos(rotationRad);
+            float sin = MathF.Sin(rotationRad);
 
             Vector2 translatedPoint = v - origin;
 
