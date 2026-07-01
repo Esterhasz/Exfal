@@ -145,24 +145,18 @@ drawer.DrawTexture(texture, opts);
 Then, you'll have to register the method:
 ```csharp
 //registering for rendering
-drawer.OutputCamera.Register(Draw);
+//0 - default camera
+drawer.Cameras[0].Register(Draw);
 ```
 You can also use more than one camera:
 ```csharp
-drawer.Cameras.Add(0, new Camera(renderSource, new Point(1920, 1080, order: 1)));
-drawer.Cameras[0].Register(Draw);
+drawer.Cameras.Add(1, new Camera(renderSource, new Point(1920, 1080)));
+drawer.Cameras[1].Register(Draw);
 ```
 > [!NOTE]
 > Each camera handles only its own registered draws.
 
-Call `drawer.Draw()` in your draw-cycle. You can also split the rendering if you have specific needs.
-```csharp
-drawer.RenderAll();   // renders everything on the single frame
-drawer.Clear();       // clears the screen
-drawer.DrawCanvas();  // draws the frame to the screen
-
-drawer.Draw();        // does all three in the exact same order
-```
+Call `drawer.Draw()` in your draw-cycle. 
 
 # StepTask 
 StepTask is a kind of coroutine. It helps with organizing independent running methods: interpolations, delays, etc. 
