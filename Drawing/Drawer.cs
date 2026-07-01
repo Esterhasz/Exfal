@@ -28,13 +28,15 @@ namespace Exfal.Drawing
 
         public CameraCollection Cameras { get; } = new();
 
-        private Rectangle destination;
-        private Rectangle windowBounds;
+        private Rectangle _destination;
+        private Rectangle _windowBounds;
 
         public Drawer(Canvas canvas)
         {
             Canvas = canvas;
             OutputCamera = CreateCamera();
+
+            UpdateDestination();
         }
         public Drawer(RenderSource source, Point size) : this(new Canvas(source, size)) { }
         public Drawer(SpriteBatch spriteBatch, GraphicsDeviceManager graphicsManager, Point size) : this(
@@ -62,7 +64,7 @@ namespace Exfal.Drawing
 
             void DrawItem(Camera item)
             {
-                SpriteBatch.Draw(item.RenderTarget, new Rectangle(windowBounds.Location, Canvas.Size), Color.White);
+                SpriteBatch.Draw(item.RenderTarget, new Rectangle(_windowBounds.Location, Canvas.Size), Color.White);
             }
 
             DrawItem(OutputCamera);
@@ -78,17 +80,16 @@ namespace Exfal.Drawing
         {
             SpriteBatch batch = SpriteBatch;
 
-            if (windowBounds != Graphics.Viewport.Bounds)
+            if (_windowBounds != Graphics.Viewport.Bounds)
             {
-                destination = ScaleFunc.Invoke(Canvas.Size, Graphics.Viewport.Bounds);
-                windowBounds = Graphics.Viewport.Bounds;
+                UpdateDestination();
             }
 
             batch.Begin(Options);
             
             batch.Draw(
                 Canvas.RenderTarget,
-                destination, 
+                _destination, 
                 Color.White);
 
             batch.End();
@@ -110,8 +111,14 @@ namespace Exfal.Drawing
         public ViewportPoint ToViewportPoint(Vector2 point)
         {
             return new(
-                new NormalizedPoint(point, destination.ToRectangleF()), 
+                new NormalizedPoint(point, _destination.ToRectangleF()), 
                 Canvas.Size.ToVector2());
+        }
+
+        private void UpdateDestination()
+        {
+            _destination = ScaleFunc.Invoke(Canvas.Size, Graphics.Viewport.Bounds);
+            _windowBounds = Graphics.Viewport.Bounds;
         }
     }
 }
