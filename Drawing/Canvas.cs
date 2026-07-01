@@ -63,5 +63,10 @@ namespace Exfal.Drawing
         {
             _source = source ?? throw new ArgumentNullException(nameof(source), "Render source can't be null."); ;
         }
+
+        public Vector2 ToWorldPoint(ViewportPoint point)
+        {
+            return (point.val / (point.view / Size.ToVector2()) + Position);
+        }
     }
 }
