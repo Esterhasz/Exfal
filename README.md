@@ -1,6 +1,6 @@
 # Exfal
-A MonoGame abstraction layer library that adds object oriented implementation of advanced rendering system, input handling, time management, and even coroutines to simplify 
-creation of graphical applications and games when using XNA-compatible frameworks since it is based on Microsoft.Xna.Framework namespace.
+A MonoGame abstraction layer library that adds object oriented implementation of advanced rendering system, input handling, time management, and even coroutines! The purpose is to simplify 
+creation of graphical applications and games when using XNA-compatible frameworks (such as MonoGame) since it is based on Microsoft.Xna.Framework namespace.
 
 ## Features
 
