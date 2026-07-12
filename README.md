@@ -1,6 +1,6 @@
 # Exfal
-Exfal is a painkiller for MonoGame, providing an advanced rendering pipeline, input handling, time management, and coroutines. 
-It simplifies the development of games and graphical applications built on XNA-compatible frameworks such as MonoGame.
+Exfal is a painkiller for MonoGame, providing an object-oriented rendering pipeline, input handling, time management, and even coroutines.
+It simplifies the development of games and graphical applications by handling common boilerplate code usually required in MonoGame projects.
 
 ## Features
 
