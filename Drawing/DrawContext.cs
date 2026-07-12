@@ -10,6 +10,8 @@ namespace Exfal.Drawing
     {
         public SpriteBatch SpriteBatch { get; }
         public Texture2D PixelTexture { get; }
+        public Camera Camera { get; internal set; }
+        public int Layer { get; internal set; }
 
         public DrawContext(RenderSource source)
         {

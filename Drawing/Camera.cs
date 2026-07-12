@@ -23,13 +23,18 @@ namespace Exfal.Drawing
         {
             Begin();
 
-            foreach (var layer in Layers.Values)
+            foreach (var layer in Layers)
             {
-                foreach (var draw in layer)
+                List<DrawAction> draws = layer.Value;
+                Context.Layer = layer.Key;
+
+                for (int i = 0; i < draws.Count; i++)
                 {
-                    draw(Context);
+                    draws[i](Context);
                 }
             }
+
+            Context.Layer = DefaultLayer;
             
             End();
         }
@@ -37,7 +42,11 @@ namespace Exfal.Drawing
         protected override void SetSource(RenderSource source)
         {
             base.SetSource(source);
-            Context = new(source);
+            Context = new(source)
+            {
+                Camera = this,
+                Layer = DefaultLayer
+            };
         }
         public override string ToString() => $"{Position} {Size.X}x{Size.Y}";
     }
