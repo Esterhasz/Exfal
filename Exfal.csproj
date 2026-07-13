@@ -20,15 +20,16 @@
 	<PackageTags>monogame;gamedev;library;rendering;coroutines;</PackageTags>
 	<RepositoryUrl>https://github.com/sonesoul/Exfal</RepositoryUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>  
 	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303"/>
-  </ItemGroup>
   
-  <ItemGroup>
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
 	<None Include="README.md" Pack="true" PackagePath="\" />
+
   </ItemGroup>
 
 </Project>
