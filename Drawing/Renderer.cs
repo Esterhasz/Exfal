@@ -4,7 +4,7 @@ using Exfal.Extensions;
 
 namespace Exfal.Drawing
 {
-    public class Drawer
+    public class Renderer
     {
         public delegate Rectangle ScaleFunction(in Point source, in Rectangle target);
 
@@ -41,14 +41,14 @@ namespace Exfal.Drawing
         private Rectangle _destination;
         private Rectangle _windowBounds;
 
-        public Drawer(Canvas canvas)
+        public Renderer(Canvas canvas)
         {
             Canvas = canvas;
             Cameras[DefaultCameraIndex] = CreateCamera();
             WindowBounds = Graphics.Viewport.Bounds;
         }
-        public Drawer(RenderSource source, Point size) : this(new Canvas(source, size)) { }
-        public Drawer(SpriteBatch spriteBatch, GraphicsDeviceManager graphicsManager, Point size) : this(
+        public Renderer(RenderSource source, Point size) : this(new Canvas(source, size)) { }
+        public Renderer(SpriteBatch spriteBatch, GraphicsDeviceManager graphicsManager, Point size) : this(
             new Canvas(
                 new RenderSource(spriteBatch, graphicsManager), 
                 size)) { }
