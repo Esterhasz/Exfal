@@ -200,7 +200,7 @@ if (Input.IsKeyDown(Key.MouseLeft))
 //or you can use events
 void HandleKey(Key k)
 {
-    if (k == MouseLeft)
+    if (k == Key.MouseLeft)
         DoSomething();
 }
 
@@ -208,7 +208,7 @@ Input.KeyPressed += HandleKey;
 Input.KeyReleased += HandleKey;
 ``` 
 > [!NOTE]
-> There is `Input.MousePosition` property. It returns position on the screen. Since cameras have different resolution, you'll have to use `drawer.ScreenToWorldPoint(screenPos, camera)` to get position based on the viewport of the camera.
+> There is `Input.MousePosition` property. It returns position on the screen. Since cameras can have different resolution, you'll have to use `drawer.ToViewportPoint` and then `camera.ToWorldPoint` to get position based on the viewport of the camera.
 
 # Tips
 Rendering module makes resolution of the application static. If you want to use this ✨ _fancy_ ✨ rendering system but don't want to deal with static resolution, there is an easy fix: 
