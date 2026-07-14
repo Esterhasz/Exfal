@@ -52,8 +52,11 @@ namespace Exfal.Drawing
             if (_size == newSize)
                 return;
 
-            if (newSize.X <= 0 || newSize.Y <= 0)
-                return;
+            if (newSize.X < 1)
+                throw new ArgumentOutOfRangeException(nameof(newSize), "Surface width cannot be less than one.");
+
+            if (newSize.Y < 1)
+                throw new ArgumentOutOfRangeException(nameof(newSize), "Surface height cannot be less than one.");
 
             RenderTarget?.Dispose();
             RenderTarget = new(Source.Graphics, newSize.X, newSize.Y);
