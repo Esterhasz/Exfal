@@ -216,7 +216,8 @@ Rendering module makes resolution of the application static. If you want to use 
 Window.ClientSizeChanged += (obj, args) =>
 {
     drawer.Canvas.Size = Window.ClientBounds.Size;
-    drawer.OutputCamera.Size = Window.ClientBounds.Size;
+    drawer.Cameras[0].Size = Window.ClientBounds.Size;
+    // 0 = default camera
 };
 ```
 > [!NOTE]
@@ -225,11 +226,11 @@ Window.ClientSizeChanged += (obj, args) =>
 
 Each `Camera` has its own properties for drawing. You can make its background transparent which can be really useful when you have a camera used only for UI rendering.
 ```csharp
-drawer.GetCamera(UI_CAMERA_ORDER).BackgroundColor = Color.Transparent; 
+drawer.Cameras[myUiCamera].BackgroundColor = Color.Transparent; 
 ```
 ---
 
-When `Graphics.Viewport` changes, `Drawer` automatically adjusts output (in `DrawCanvas(...)` method) using specific scaling function - and you can make and use your own one!
+When `Graphics.Viewport` changes, `Drawer` automatically adjusts output using specific scaling function. You can make and use your own one!
 This could be done the same way as mentioned in `YieldInstruction overriding`. 
 ```csharp
 static class RectScalerExtensions
@@ -244,7 +245,7 @@ static class RectScalerExtensions
 drawer.ScaleFunc = Drawer.OutputScaler.MyScale;
 ```
 ---
-Exfal has LOTS of extensions. The most detailed ones are extensions for Vector2. 
+Exfal has LOTS of extensions. The most detailed ones are extensions for `Vector2`. 
 ```csharp
 //they are all returning values and DO NOT change the vector
 
