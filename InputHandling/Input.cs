@@ -87,7 +87,7 @@ namespace Exfal.InputHandling
             Key.MouseMiddle => MouseState.MiddleButton == ButtonState.Pressed,
             Key.MouseX1 => MouseState.XButton1 == ButtonState.Pressed,
             Key.MouseX2 => MouseState.XButton2 == ButtonState.Pressed,
-            _ => throw new InvalidOperationException($"\"{key}\" is not a mouse key or it doesn't exist in the {nameof(Key)} enumeration."),
+            _ => throw new ArgumentOutOfRangeException($"\"{key}\" is not a mouse key or it doesn't exist in the {nameof(Key)} enumeration."),
         };
 
         public static bool JustPressed(Key key) => _justPressed[GetKeyIndex(key)];
