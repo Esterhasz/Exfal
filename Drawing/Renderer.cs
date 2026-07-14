@@ -11,8 +11,8 @@ namespace Exfal.Drawing
         public const int DefaultCameraIndex = 0;
 
         public static RectScaler OutputScaler { get; } = new();
-
         public RenderOptions Options { get; set; } = new();
+        public RenderOptions OutputOptions { get; set; } = new();
 
         public Surface Surface { get; set; }
 
@@ -61,12 +61,16 @@ namespace Exfal.Drawing
             }
 
             Surface.Begin();
+            SpriteBatch.Begin(OutputOptions);
+
             Rectangle dst = new(_windowBounds.Location, Surface.Size);
 
             foreach (var item in Cameras.Values)
             {
                 SpriteBatch.Draw(item.RenderTarget, dst, Color.White);
             }
+
+            SpriteBatch.End();
             Surface.End();
 
             Device.Clear(BackgroundColor);
