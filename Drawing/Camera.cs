@@ -42,6 +42,8 @@ namespace Exfal.Drawing
         protected override void SetGraphics(GraphicsProvider graphics)
         {
             base.SetGraphics(graphics);
+
+            Context?.Dispose();
             Context = new(graphics)
             {
                 Camera = this,

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Exfal.Drawing
 {
-    public class GraphicsProvider
+    public class GraphicsProvider 
     {
         public SpriteBatch SpriteBatch { get; }
         public GraphicsDevice Device { get; }
@@ -15,9 +15,6 @@ namespace Exfal.Drawing
             SpriteBatch = batch;
             Manager = manager;
             Device = manager.GraphicsDevice;
-
-            Pixel = new Texture2D(Device, 1, 1);
-            Pixel.SetData(new[] { Color.White });
         }
     }
 }

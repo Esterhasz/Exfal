@@ -6,17 +6,44 @@ using Exfal.Extensions;
 
 namespace Exfal.Drawing
 {
-    public class DrawContext
+    public class DrawContext : IDisposable
     {
         public SpriteBatch SpriteBatch { get; }
         public Texture2D PixelTexture { get; }
         public Camera Camera { get; internal set; }
         public int Layer { get; internal set; }
 
+        private bool _disposed = false;
+
         public DrawContext(GraphicsProvider graphics)
         {
             SpriteBatch = graphics.SpriteBatch;
-            PixelTexture = graphics.Pixel;
+            
+            PixelTexture = new Texture2D(graphics.Device, 1, 1);
+            PixelTexture.SetData(new[] { Color.White });
+        }
+        ~DrawContext()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    PixelTexture.Dispose();
+                }
+
+                _disposed = true;
+            }
         }
 
         public void String(string str, SpriteFont font, Vector2 position, Color color, Vector2 scale, Vector2 origin, float rotationRad = 0)
