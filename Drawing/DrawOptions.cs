@@ -10,6 +10,7 @@ namespace Exfal.Drawing
 
         public Color color = Color.White;
         public float rotationRad = 0;
+        public float depth = 0;
 
         public DrawOptions() { }
     }

@@ -32,7 +32,6 @@ namespace Exfal.Drawing
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -46,7 +45,30 @@ namespace Exfal.Drawing
             }
         }
 
-        public void String(string str, SpriteFont font, Vector2 position, Color color, Vector2 scale, Vector2 origin, float rotationRad = 0)
+        public void String(string str, SpriteFont font, in DrawOptions options)
+        {
+            String(
+                str,
+                font,
+                options.position,
+                options.color,
+                options.scale,
+                options.origin,
+                options.rotationRad,
+                options.depth);
+        }
+        public void String(string str, SpriteFont font, Vector2 position, Color color, float depth = 0)
+        {
+            String(
+                str, 
+                font, 
+                position, 
+                color, 
+                Vector2.One, 
+                Vector2.Zero, 
+                depth);
+        }
+        public void String(string str, SpriteFont font, Vector2 position, Color color, Vector2 scale, Vector2 origin, float rotation = 0, float depth = 0)
         {
             SpriteEffects spriteEffects = SpriteEffects.None;
 
@@ -62,28 +84,16 @@ namespace Exfal.Drawing
                 scale.Y = -scale.Y;
             }
 
-            SpriteBatch.DrawString(font, str, position, color, rotationRad, origin, scale, spriteEffects, 0);
-        }
-        public void String(string str, SpriteFont font, Vector2 position, Color color)
-        {
-            String(
-                str, 
+            SpriteBatch.DrawString(
                 font, 
+                str, 
                 position, 
                 color, 
-                Vector2.One, 
-                Vector2.Zero);
-        }
-        public void String(string str, SpriteFont font, in DrawOptions options)
-        {
-            String(
-                str,
-                font,
-                options.position,
-                options.color,
-                options.scale,
-                options.origin,
-                options.rotationRad);
+                rotation, 
+                origin, 
+                scale, 
+                spriteEffects, 
+                depth);
         }
 
         public void Texture(Texture2D texture, in DrawOptions options)
@@ -115,45 +125,115 @@ namespace Exfal.Drawing
                 origin,
                 scale,
                 spriteEffects,
-                0);
+                options.depth);
+        }
+        public void Texture(Texture2D texture, Vector2 position, Color color, float depth = 0)
+        {
+            Texture(texture, new DrawOptions
+            {
+                position = position,
+                color = color,
+                scale = Vector2.One,
+                origin = Vector2.Zero,
+                rotationRad = 0,
+                depth = depth
+            });
+        }
+        public void Texture(Texture2D texture, Vector2 position, Color color, Vector2 scale, Vector2 origin, float rotation = 0, float depth = 0)
+        {
+            Texture(texture, new DrawOptions
+            {
+                position = position,
+                color = color,
+                scale = scale,
+                origin = origin,
+                rotationRad = rotation,
+                depth = depth
+            });
         }
 
         public void Rectangle(Rectangle rect, Color color)
         {
-            rect.Size = (rect.Size.ToVector2().Both() + 1).ToPoint();
+            var size = rect.Size;
+            rect.Size = new(size.X + 1, size.Y + 1);
             SpriteBatch.Draw(PixelTexture, rect, color);
         }
+        public void Rectangle(Vector2 position, Vector2 size, Color color, float rotation = 0, float depth = 0)
+        {
+            SpriteBatch.Draw(
+                PixelTexture,
+                position,
+                null,
+                color,
+                rotation,
+                Vector2.Zero,
+                size,
+                SpriteEffects.None,
+                depth);
+        }
+        public void Rectangle(Vector2 position, Vector2 size, Color color, Vector2 origin, float rotation = 0, float depth = 0)
+        {
+            SpriteBatch.Draw(
+                PixelTexture,
+                position,
+                null,
+                color,
+                rotation,
+                origin,
+                size,
+                SpriteEffects.None,
+                depth);
+        }
 
-        public void Polygon(List<Vector2> vertices, Color color, float boundThickness)
+        public void Polygon(List<Vector2> vertices, Color color, float boundThickness = 1f, float depth = 0)
         {
             for (int i = 0; i < vertices.Count; i++)
             {
                 var current = vertices[i];
                 var next = vertices[(i + 1) % vertices.Count];
 
-                Line(current, next, color, boundThickness);
+                Line(current, next, color, Vector2.Zero, boundThickness, depth);
             }
         }
+        
         public void Line(Vector2 start, Vector2 end, Color color, float thickness = 1f)
+        {
+            Line(start, end, color, Vector2.Zero, thickness, 0);
+        }
+        public void Line(Vector2 start, Vector2 end, Color color, Vector2 origin, float thickness = 1f, float depth = 0)
         {
             Vector2 edge = end - start;
             float angle = MathF.Atan2(edge.Y, edge.X);
             float length = edge.Length();
-            
+
             SpriteBatch.Draw(
-                PixelTexture, 
-                start, 
-                null, 
-                color, 
-                angle, 
-                Vector2.Zero, 
-                new Vector2(length, thickness), 
-                SpriteEffects.None, 
-                0);
+                PixelTexture,
+                start,
+                null,
+                color,
+                angle,
+                origin,
+                new Vector2(length, thickness),
+                SpriteEffects.None,
+                depth);
         }
+
         public void Pixel(Vector2 position, Color color)
         {
             SpriteBatch.Draw(PixelTexture, position, color);
+        }
+        public void Pixel(Vector2 position, Color color, float depth)
+        {
+            SpriteBatch.Draw(
+                PixelTexture,
+                position,
+                null,
+                color,
+                0,
+                Vector2.Zero,
+                Vector2.One,
+                SpriteEffects.None,
+                depth);
         }
     }
 }
